@@ -64,7 +64,7 @@
        │   ↓ quota exhausted
        ├─→ [Tier 2: CHEAP] GLM ($0.6/1M), MiniMax ($0.2/1M)
        │   ↓ budget limit
-       └─→ [Tier 3: FREE] Kiro, OpenCode Free, Vertex ($300 credits)
+       └─→ [Tier 3: FREE] Freebuff, Kiro, OpenCode Free, Vertex ($300 credits)
 
 Result: Never stop coding, minimal cost + 20-40% token savings via RTK
 ```
@@ -380,6 +380,11 @@ curl http://localhost:20128/v1/chat/completions \
 <div align="center">
   <table>
     <tr>
+      <td align="center" width="150">
+        <img src="./public/providers/freebuff.png" width="70" alt="Freebuff"/><br/>
+        <b>Freebuff</b><br/>
+        <sub>Codebuff Free Tier<br/>MiMo, MiniMax, GLM, DeepSeek</sub>
+      </td>
       <td align="center" width="150">
         <img src="./public/providers/kiro.png" width="70" alt="Kiro"/><br/>
         <b>Kiro AI</b><br/>

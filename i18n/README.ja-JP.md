@@ -274,9 +274,14 @@ curl http://localhost:20128/v1/chat/completions \
         <sub>月18万回無料</sub>
       </td>
       <td align="center" width="150">
+        <img src="../public/providers/freebuff.png" width="70" alt="Freebuff"/><br/>
+        <b>Freebuff</b><br/>
+        <sub>Codebuff 無料層<br/>MiMo, MiniMax, GLM, DeepSeek</sub>
+      </td>
+      <td align="center" width="150">
         <img src="../public/providers/kiro.png" width="70" alt="Kiro"/><br/>
         <b>Kiro AI</b><br/>
-        <sub>Claude • 無制限</sub>
+        <sub>Claude 4.5 + GLM-5 + MiniMax<br/>毎月 50 クレジット無料</sub>
       </td>
     </tr>
   </table>

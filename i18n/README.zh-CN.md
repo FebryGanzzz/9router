@@ -277,9 +277,14 @@ curl http://localhost:20128/v1/chat/completions \
         <sub>180K/月 免费</sub>
       </td>
       <td align="center" width="150">
+        <img src="../public/providers/freebuff.png" width="70" alt="Freebuff"/><br/>
+        <b>Freebuff</b><br/>
+        <sub>Codebuff 免费层<br/>MiMo, MiniMax, GLM, DeepSeek</sub>
+      </td>
+      <td align="center" width="150">
         <img src="../public/providers/kiro.png" width="70" alt="Kiro"/><br/>
         <b>Kiro AI</b><br/>
-        <sub>Claude • 无限制</sub>
+        <sub>Claude 4.5 + GLM-5 + MiniMax<br/>每月 50 积分免费</sub>
       </td>
     </tr>
   </table>

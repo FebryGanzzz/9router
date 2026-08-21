@@ -276,9 +276,14 @@ curl http://localhost:20128/v1/chat/completions \
         <sub>180K/мес БЕСПЛАТНО</sub>
       </td>
       <td align="center" width="150">
+        <img src="../public/providers/freebuff.png" width="70" alt="Freebuff"/><br/>
+        <b>Freebuff</b><br/>
+        <sub>Codebuff Free Tier<br/>MiMo, MiniMax, GLM, DeepSeek</sub>
+      </td>
+      <td align="center" width="150">
         <img src="../public/providers/kiro.png" width="70" alt="Kiro"/><br/>
         <b>Kiro AI</b><br/>
-        <sub>Claude • Без ограничений</sub>
+        <sub>Claude 4.5 + GLM-5 + MiniMax<br/>50 кредитов/мес бесплатно</sub>
       </td>
     </tr>
   </table>

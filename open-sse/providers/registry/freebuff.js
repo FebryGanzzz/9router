@@ -7,8 +7,8 @@ export default {
   uiAlias: "cb",
   display: {
     name: "Freebuff",
-    icon: "smart_toy",
-    color: "#4FC3F7",
+    icon: "bolt",
+    color: "#6366F1",
     textIcon: "FB",
     website: "https://www.codebuff.com",
     notice: {
