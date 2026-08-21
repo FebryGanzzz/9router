@@ -82,7 +82,7 @@ cp .env.example .env
 npm install
 ```
 
-### 2. Jalankan 9Router
+### 2. Run 9Router
 
 **Development mode:**
 
@@ -103,10 +103,10 @@ Default URLs:
 
 ---
 
-### 3. Hubungkan Provider (Freebuff, Kiro, OpenCode)
+### 3. Connect Providers (Freebuff, Kiro, OpenCode)
 
-1. Buka dashboard di `http://localhost:20128/dashboard` → tab **Providers**.
-2. **Freebuff (`cb/`)**: Klik provider **Freebuff** → Klik **Login** untuk autentikasi OAuth Device-Code (atau masukkan `authToken` Codebuff). Model tersedia:
+1. Open the dashboard at `http://localhost:20128/dashboard` → **Providers** tab.
+2. **Freebuff (`cb/`)**: Select **Freebuff** → Click **Login** for Device-Code OAuth authentication (or enter your Codebuff `authToken` as API key). Available models:
    - `cb/mimo/mimo-v2.5` (Default free tier)
    - `cb/minimax/minimax-m2.7`
    - `cb/z-ai/glm-5.1`
@@ -114,22 +114,22 @@ Default URLs:
    - `cb/deepseek/deepseek-v4-flash`
    - `cb/deepseek/deepseek-v4-pro`
    - `cb/moonshotai/kimi-k2.6`
-3. **Kiro AI (`kr/`)** atau **OpenCode Free (`oc/`)**: Hubungkan akun untuk model gratis tambahan.
+3. **Kiro AI (`kr/`)** or **OpenCode Free (`oc/`)**: Connect for additional free models.
 
 ---
 
-### 4. Gunakan di AI Tools / CLI
+### 4. Use in AI Tools & CLI Clients
 
-Konfigurasikan endpoint pada Claude Code, Cursor, Cline, OpenClaw, Continue, dsb.:
+Configure the endpoint in Claude Code, Cursor, Cline, OpenClaw, Continue, etc.:
 
 ```
 Settings / Config:
   Endpoint / Base URL: http://localhost:20128/v1
-  API Key: [Salin dari menu Keys di dashboard]
-  Model: cb/mimo/mimo-v2.5 (atau kr/claude-sonnet-4.5)
+  API Key: [Copy from Keys menu in dashboard]
+  Model: cb/mimo/mimo-v2.5 (or kr/claude-sonnet-4.5)
 ```
 
-**Contoh cURL Langsung:**
+**Direct cURL Example:**
 
 ```bash
 curl http://localhost:20128/v1/chat/completions \
@@ -138,7 +138,7 @@ curl http://localhost:20128/v1/chat/completions \
   -d '{
     "model": "cb/mimo/mimo-v2.5",
     "messages": [
-      {"role": "user", "content": "Halo dari 9Router FebryGanzzz!"}
+      {"role": "user", "content": "Hello from 9Router FebryGanzzz edition!"}
     ]
   }'
 ```

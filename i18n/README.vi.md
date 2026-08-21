@@ -64,43 +64,26 @@ Kết quả: Không bao giờ ngừng code, chi phí tối thiểu + tiết ki�
 
 ---
 
-## ⚡ Bắt đầu nhanh
+## ⚡ Bắt đầu nhanh (Phiên bản FebryGanzzz)
 
-**1. Cài đặt toàn cục:**
-
-```bash
-npm install -g 9router
-9router
-```
-
-🎉 Bảng điều khiển (Dashboard) sẽ tự động mở tại `http://localhost:20128`
-
-**2. Kết nối nhà cung cấp MIỄN PHÍ (không cần đăng ký):**
-
-Bảng điều khiển → Providers → Kết nối **Kiro AI** (~50 credits/tháng miễn phí: Claude 4.5 + GLM-5 + MiniMax) hoặc **OpenCode Free** (không cần auth) → Xong!
-
-**3. Sử dụng trong công cụ CLI của bạn:**
-
-```
-Cài đặt Claude Code/Codex/OpenClaw/Cursor/Cline/Antigravity:
-  Endpoint: http://localhost:20128/v1
-  API Key: [sao chép từ bảng điều khiển]
-  Model: kr/claude-sonnet-4.5
-```
-
-**Thế là xong!** Bắt đầu code ngay với các mô hình AI MIỄN PHÍ.
-
-**Phương án khác: chạy từ mã nguồn (repository này):**
-
-Gói kho lưu trữ này là riêng tư (`9router-app`), vì vậy việc chạy từ nguồn/Docker là cách phát triển cục bộ mặc định.
+### 1. Clone & Cài đặt Repository
 
 ```bash
+git clone https://github.com/FebryGanzzz/9router.git
+cd 9router
 cp .env.example .env
 npm install
+```
+
+### 2. Khởi chạy 9Router
+
+**Chế độ phát triển (Development):**
+
+```bash
 PORT=20128 NEXT_PUBLIC_BASE_URL=http://localhost:20128 npm run dev
 ```
 
-Chế độ Production:
+**Chế độ Production:**
 
 ```bash
 npm run build
@@ -108,8 +91,50 @@ PORT=20128 HOSTNAME=0.0.0.0 NEXT_PUBLIC_BASE_URL=http://localhost:20128 npm run 
 ```
 
 URL mặc định:
-- Bảng điều khiển Dashboard: `http://localhost:20128/dashboard`
-- API tương thích OpenAI: `http://localhost:20128/v1`
+- **Bảng điều khiển (Dashboard)**: `http://localhost:20128/dashboard`
+- **API tương thích OpenAI**: `http://localhost:20128/v1`
+
+---
+
+### 3. Kết nối nhà cung cấp (Freebuff, Kiro, OpenCode)
+
+1. Mở dashboard tại `http://localhost:20128/dashboard` → tab **Providers**.
+2. **Freebuff (`cb/`)**: Chọn **Freebuff** → Nhấn **Login** để xác thực OAuth Device-Code (hoặc nhập `authToken` Codebuff). Các model hỗ trợ:
+   - `cb/mimo/mimo-v2.5` (Mặc định gói miễn phí)
+   - `cb/minimax/minimax-m2.7`
+   - `cb/z-ai/glm-5.1`
+   - `cb/google/gemini-3.1-pro-preview`
+   - `cb/deepseek/deepseek-v4-flash`
+   - `cb/deepseek/deepseek-v4-pro`
+   - `cb/moonshotai/kimi-k2.6`
+3. **Kiro AI (`kr/`)** hoặc **OpenCode Free (`oc/`)**: Kết nối để nhận thêm các model miễn phí.
+
+---
+
+### 4. Sử dụng trong AI Tools / CLI
+
+Cấu hình endpoint trong Claude Code, Cursor, Cline, OpenClaw, Continue, v.v.:
+
+```
+Cài đặt / Config:
+  Endpoint / Base URL: http://localhost:20128/v1
+  API Key: [Sao chép từ menu Keys trên Dashboard]
+  Model: cb/mimo/mimo-v2.5 (hoặc kr/claude-sonnet-4.5)
+```
+
+**Ví dụ gọi trực tiếp cURL:**
+
+```bash
+curl http://localhost:20128/v1/chat/completions \
+  -H "Authorization: Bearer <9router-api-key>" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "cb/mimo/mimo-v2.5",
+    "messages": [
+      {"role": "user", "content": "Xin chào từ 9Router phiên bản FebryGanzzz!"}
+    ]
+  }'
+```
 
 ---
 

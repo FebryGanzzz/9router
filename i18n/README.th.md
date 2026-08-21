@@ -69,43 +69,26 @@
 
 ---
 
-## ⚡ เริ่มต้นใช้งาน
+## ⚡ เริ่มต้นใช้งาน (เวอร์ชัน FebryGanzzz)
 
-**1. ติดตั้งแบบ Global:**
-
-```bash
-npm install -g 9router
-9router
-```
-
-🎉 เปิดแดชบอร์ดที่ `http://localhost:20128`
-
-**2. เชื่อมต่อผู้ให้บริการฟรี (ไม่ต้องสมัคร):**
-
-แดชบอร์ด → Providers → เชื่อมต่อ **Kiro AI** (Claude ฟรีไม่จำกัด) หรือ **OpenCode Free** (ไม่ต้องยืนยันตัวตน) → เสร็จ!
-
-**3. ใช้ในเครื่องมือ CLI ของคุณ:**
-
-```
-ตั้งค่า Claude Code/Codex/OpenClaw/Cursor/Cline:
-  Endpoint: http://localhost:20128/v1
-  API Key: [คัดลอกจากแดชบอร์ด]
-  Model: kr/claude-sonnet-4.5
-```
-
-**เสร็จแล้ว!** เริ่มเขียนโค้ดด้วยโมเดล AI ฟรี
-
-**วิธีอื่น: รันจากซอร์สโค้ด (เก็บรักษาไว้ใน repo นี้):**
-
-Repo นี้เป็น private package (`9router-app`) ดังนั้นการรันจากซอร์ส/Docker คือเส้นทางพัฒนาท้องถิ่นที่คาดไว้
+### 1. โคลนและติดตั้ง Repository
 
 ```bash
+git clone https://github.com/FebryGanzzz/9router.git
+cd 9router
 cp .env.example .env
 npm install
+```
+
+### 2. รัน 9Router
+
+**โหมด Development:**
+
+```bash
 PORT=20128 NEXT_PUBLIC_BASE_URL=http://localhost:20128 npm run dev
 ```
 
-โหมด Production:
+**โหมด Production:**
 
 ```bash
 npm run build
@@ -113,8 +96,50 @@ PORT=20128 HOSTNAME=0.0.0.0 NEXT_PUBLIC_BASE_URL=http://localhost:20128 npm run 
 ```
 
 URL ค่าเริ่มต้น:
-- แดชบอร์ด: `http://localhost:20128/dashboard`
-- OpenAI-compatible API: `http://localhost:20128/v1`
+- **แดชบอร์ด UI**: `http://localhost:20128/dashboard`
+- **OpenAI-compatible API**: `http://localhost:20128/v1`
+
+---
+
+### 3. เชื่อมต่อผู้ให้บริการ (Freebuff, Kiro, OpenCode)
+
+1. เปิดแดชบอร์ดที่ `http://localhost:20128/dashboard` → แท็บ **Providers**
+2. **Freebuff (`cb/`)**: เลือก **Freebuff** → คลิก **Login** เพื่อยืนยันตัวตนด้วย OAuth Device-Code (หรือใส่ `authToken` จาก Codebuff) โมเดลที่รองรับ:
+   - `cb/mimo/mimo-v2.5` (โมเดลฟรีเริ่มต้น)
+   - `cb/minimax/minimax-m2.7`
+   - `cb/z-ai/glm-5.1`
+   - `cb/google/gemini-3.1-pro-preview`
+   - `cb/deepseek/deepseek-v4-flash`
+   - `cb/deepseek/deepseek-v4-pro`
+   - `cb/moonshotai/kimi-k2.6`
+3. **Kiro AI (`kr/`)** หรือ **OpenCode Free (`oc/`)**: เชื่อมต่อเพื่อรับโมเดลฟรีเพิ่มเติม
+
+---
+
+### 4. ใช้ในเครื่องมือ AI / CLI
+
+กำหนดค่า endpoint ใน Claude Code, Cursor, Cline, OpenClaw, Continue ฯลฯ:
+
+```
+การตั้งค่า / Config:
+  Endpoint / Base URL: http://localhost:20128/v1
+  API Key: [คัดลอกจากเมนู Keys ในแดชบอร์ด]
+  Model: cb/mimo/mimo-v2.5 (หรือ kr/claude-sonnet-4.5)
+```
+
+**ตัวอย่างการเรียกใช้ผ่าน cURL โดยตรง:**
+
+```bash
+curl http://localhost:20128/v1/chat/completions \
+  -H "Authorization: Bearer <9router-api-key>" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "cb/mimo/mimo-v2.5",
+    "messages": [
+      {"role": "user", "content": "สวัสดีจาก 9Router เวอร์ชัน FebryGanzzz!"}
+    ]
+  }'
+```
 
 ---
 

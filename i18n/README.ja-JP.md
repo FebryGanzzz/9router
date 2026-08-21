@@ -63,43 +63,26 @@
 
 ---
 
-## ⚡ クイックスタート
+## ⚡ クイックスタート (FebryGanzzz エディション)
 
-**1. グローバルインストール：**
-
-```bash
-npm install -g 9router
-9router
-```
-
-🎉 ダッシュボードが `http://localhost:20128` で開きます
-
-**2. 無料プロバイダーを接続（サインアップ不要）：**
-
-ダッシュボード → Providers → **Claude Code** または **Antigravity** を接続 → OAuthログイン → 完了！
-
-**3. CLIツールで使用：**
-
-```
-Claude Code/Codex/Gemini CLI/OpenClaw/Cursor/Clineの設定:
-  エンドポイント: http://localhost:20128/v1
-  APIキー: [ダッシュボードからコピー]
-  モデル: if/kimi-k2-thinking
-```
-
-**これだけです！** 無料AIモデルでコーディングを始めましょう。
-
-**代替方法: ソースから実行（このリポジトリ）：**
-
-このリポジトリパッケージはプライベート（`9router-app`）のため、ソース/Docker実行がローカル開発の想定パスです。
+### 1. リポジトリのクローンとインストール
 
 ```bash
+git clone https://github.com/FebryGanzzz/9router.git
+cd 9router
 cp .env.example .env
 npm install
+```
+
+### 2. 9Router の起動
+
+**開発モード：**
+
+```bash
 PORT=20128 NEXT_PUBLIC_BASE_URL=http://localhost:20128 npm run dev
 ```
 
-本番モード：
+**本番モード：**
 
 ```bash
 npm run build
@@ -107,8 +90,50 @@ PORT=20128 HOSTNAME=0.0.0.0 NEXT_PUBLIC_BASE_URL=http://localhost:20128 npm run 
 ```
 
 デフォルトURL：
-- ダッシュボード: `http://localhost:20128/dashboard`
-- OpenAI互換API: `http://localhost:20128/v1`
+- **ダッシュボード UI**: `http://localhost:20128/dashboard`
+- **OpenAI 互換 API**: `http://localhost:20128/v1`
+
+---
+
+### 3. プロバイダーの接続（Freebuff、Kiro、OpenCode）
+
+1. `http://localhost:20128/dashboard` のダッシュボードを開き、**Providers** タブへ移動します。
+2. **Freebuff (`cb/`)**: **Freebuff** プロバイダーを選択 → **Login** をクリックしてデバイスコード OAuth 認証（または Codebuff `authToken` を API キーとして入力）。利用可能なモデル：
+   - `cb/mimo/mimo-v2.5` (デフォルト無料層)
+   - `cb/minimax/minimax-m2.7`
+   - `cb/z-ai/glm-5.1`
+   - `cb/google/gemini-3.1-pro-preview`
+   - `cb/deepseek/deepseek-v4-flash`
+   - `cb/deepseek/deepseek-v4-pro`
+   - `cb/moonshotai/kimi-k2.6`
+3. **Kiro AI (`kr/`)** または **OpenCode Free (`oc/`)**: 接続して追加の無料モデルを利用可能。
+
+---
+
+### 4. AI ツール / CLI での使用
+
+Claude Code、Cursor、Cline、OpenClaw、Continue 等でエンドポイントを設定：
+
+```
+設定 / Config:
+  Endpoint / Base URL: http://localhost:20128/v1
+  API Key: [ダッシュボードの Keys メニューからコピー]
+  Model: cb/mimo/mimo-v2.5 (または kr/claude-sonnet-4.5)
+```
+
+**cURL 直接呼び出しの例：**
+
+```bash
+curl http://localhost:20128/v1/chat/completions \
+  -H "Authorization: Bearer <9router-api-key>" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "cb/mimo/mimo-v2.5",
+    "messages": [
+      {"role": "user", "content": "9Router FebryGanzzz 版からこんにちは！"}
+    ]
+  }'
+```
 
 ---
 

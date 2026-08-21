@@ -71,43 +71,26 @@
 
 ---
 
-## ⚡ شروع سریع
+## ⚡ شروع سریع (نسخه FebryGanzzz)
 
-**۱. نصب سراسری:**
-
-```bash
-npm install -g 9router
-9router
-```
-
-🎉 داشبورد در آدرس `http://localhost:20128` باز می‌شود
-
-**۲. اتصال یک ارائه‌دهنده رایگان (بدون نیاز به ثبت‌نام):**
-
-داشبورد → ارائه‌دهندگان → اتصال **Kiro AI** (کلود رایگان نامحدود) یا **OpenCode Free** (بدون احراز هویت) → انجام شد!
-
-**۳. استفاده در ابزار خط فرمان خود:**
-
-```
-تنظیمات Claude Code/Codex/OpenClaw/Cursor/Cline:
-  آدرس端点: http://localhost:20128/v1
-  کلید API: [کپی از داشبورد]
-  مدل: kr/claude-sonnet-4.5
-```
-
-**کار تمام!** با مدل‌های رایگان هوش مصنوعی کدنویسی را شروع کنید.
-
-**روش جایگزین: اجرا از سورس (این مخزن):**
-
-بسته این مخزن خصوصی است (`9router-app`)، بنابراین اجرا از سورس/داکر مسیر معمول توسعه محلی است.
+### ۱. کلون و نصب مخزن
 
 ```bash
+git clone https://github.com/FebryGanzzz/9router.git
+cd 9router
 cp .env.example .env
 npm install
+```
+
+### ۲. اجرای 9Router
+
+**حالت توسعه (Development):**
+
+```bash
 PORT=20128 NEXT_PUBLIC_BASE_URL=http://localhost:20128 npm run dev
 ```
 
-حالت تولید:
+**حالت تولید (Production):**
 
 ```bash
 npm run build
@@ -115,9 +98,50 @@ PORT=20128 HOSTNAME=0.0.0.0 NEXT_PUBLIC_BASE_URL=http://localhost:20128 npm run 
 ```
 
 آدرس‌های پیش‌فرض:
+- **داشبورد UI**: `http://localhost:20128/dashboard`
+- **API سازگار با OpenAI**: `http://localhost:20128/v1`
 
-- داشبورد: `http://localhost:20128/dashboard`
-- API سازگار با OpenAI: `http://localhost:20128/v1`
+---
+
+### ۳. اتصال ارائه‌دهندگان (Freebuff, Kiro, OpenCode)
+
+1. داشبورد را در `http://localhost:20128/dashboard` باز کرده و به برگه **Providers** بروید.
+2. **Freebuff (`cb/`)**: ارائه‌دهنده **Freebuff** را انتخاب کرده و روی **Login** کلیک کنید تا با OAuth Device-Code احراز هویت شوید (یا `authToken` Codebuff را وارد کنید). مدل‌های در دسترس:
+   - `cb/mimo/mimo-v2.5` (مدل پیش‌فرض رایگان)
+   - `cb/minimax/minimax-m2.7`
+   - `cb/z-ai/glm-5.1`
+   - `cb/google/gemini-3.1-pro-preview`
+   - `cb/deepseek/deepseek-v4-flash`
+   - `cb/deepseek/deepseek-v4-pro`
+   - `cb/moonshotai/kimi-k2.6`
+3. **Kiro AI (`kr/`)** یا **OpenCode Free (`oc/`)**: برای مدل‌های رایگان بیشتر متصل شوید.
+
+---
+
+### ۴. استفاده در ابزارهای هوش مصنوعی / CLI
+
+آدرس و کلید را در ابزارهایی مانند Claude Code, Cursor, Cline, OpenClaw, Continue تنظیم کنید:
+
+```
+تنظیمات / Config:
+  Endpoint / Base URL: http://localhost:20128/v1
+  API Key: [کپی از منوی Keys در داشبورد]
+  Model: cb/mimo/mimo-v2.5 (یا kr/claude-sonnet-4.5)
+```
+
+**نمونه فراخوانی مستقیم cURL:**
+
+```bash
+curl http://localhost:20128/v1/chat/completions \
+  -H "Authorization: Bearer <9router-api-key>" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "cb/mimo/mimo-v2.5",
+    "messages": [
+      {"role": "user", "content": "سلام از 9Router نسخه FebryGanzzz!"}
+    ]
+  }'
+```
 
 ---
 

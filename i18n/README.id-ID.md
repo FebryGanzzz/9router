@@ -63,52 +63,77 @@ Hasil: ngoding tanpa berhenti, biaya minimum
 
 ---
 
-## ⚡ Mulai Cepat
+## ⚡ Mulai Cepat (Edisi FebryGanzzz)
 
-**1. Install secara global:**
-
-```bash
-npm install -g 9router
-9router
-```
-
-🎉 Dashboard terbuka di `http://localhost:20128`
-
-**2. Hubungkan provider gratis (tanpa perlu daftar):**
-
-Dashboard → Providers → hubungkan **Claude Code** atau **Antigravity** → login OAuth → selesai!
-
-**3. Pakai di tool CLI kamu:**
-
-```
-Konfigurasi Claude Code/Codex/Gemini CLI/OpenClaw/Cursor/Cline:
-  Endpoint: http://localhost:20128/v1
-  API Key: [salin dari dashboard]
-  Model: if/kimi-k2-thinking
-```
-
-**Cuma itu!** Mulai ngoding dengan model AI gratis.
-
-**Alternatif: jalankan dari source (repo ini):**
-
-Paket repo ini bersifat privat (`9router-app`), jadi menjalankan dari source/Docker adalah jalur yang diharapkan untuk pengembangan lokal.
+### 1. Clone & Install Repositori
 
 ```bash
+git clone https://github.com/FebryGanzzz/9router.git
+cd 9router
 cp .env.example .env
 npm install
+```
+
+### 2. Jalankan 9Router
+
+**Mode Pengembangan (Development):**
+
+```bash
 PORT=20128 NEXT_PUBLIC_BASE_URL=http://localhost:20128 npm run dev
 ```
 
-Mode produksi:
+**Mode Produksi (Production):**
 
 ```bash
 npm run build
 PORT=20128 HOSTNAME=0.0.0.0 NEXT_PUBLIC_BASE_URL=http://localhost:20128 npm run start
 ```
 
-URL default:
-- Dashboard: `http://localhost:20128/dashboard`
-- API kompatibel OpenAI: `http://localhost:20128/v1`
+URL Default:
+- **Dashboard UI**: `http://localhost:20128/dashboard`
+- **API Kompatibel OpenAI**: `http://localhost:20128/v1`
+
+---
+
+### 3. Hubungkan Provider (Freebuff, Kiro, OpenCode)
+
+1. Buka dashboard di `http://localhost:20128/dashboard` → tab **Providers**.
+2. **Freebuff (`cb/`)**: Klik provider **Freebuff** → Klik **Login** untuk autentikasi OAuth Device-Code (atau masukkan `authToken` Codebuff). Model yang didukung:
+   - `cb/mimo/mimo-v2.5` (Default tier gratis)
+   - `cb/minimax/minimax-m2.7`
+   - `cb/z-ai/glm-5.1`
+   - `cb/google/gemini-3.1-pro-preview`
+   - `cb/deepseek/deepseek-v4-flash`
+   - `cb/deepseek/deepseek-v4-pro`
+   - `cb/moonshotai/kimi-k2.6`
+3. **Kiro AI (`kr/`)** atau **OpenCode Free (`oc/`)**: Hubungkan akun untuk model gratis tambahan.
+
+---
+
+### 4. Gunakan di Tool AI / CLI
+
+Konfigurasikan endpoint pada Claude Code, Cursor, Cline, OpenClaw, Continue, dsb.:
+
+```
+Pengaturan / Konfigurasi:
+  Endpoint / Base URL: http://localhost:20128/v1
+  API Key: [Salin dari menu Keys di dashboard]
+  Model: cb/mimo/mimo-v2.5 (atau kr/claude-sonnet-4.5)
+```
+
+**Contoh cURL Langsung:**
+
+```bash
+curl http://localhost:20128/v1/chat/completions \
+  -H "Authorization: Bearer <9router-api-key>" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "cb/mimo/mimo-v2.5",
+    "messages": [
+      {"role": "user", "content": "Halo dari 9Router FebryGanzzz!"}
+    ]
+  }'
+```
 
 ---
 

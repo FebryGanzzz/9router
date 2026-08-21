@@ -69,43 +69,26 @@
 
 ---
 
-## ⚡ 快速开始
+## ⚡ 快速开始 (FebryGanzzz 版本)
 
-**1. 全局安装：**
-
-```bash
-npm install -g 9router
-9router
-```
-
-🎉 控制面板在 `http://localhost:20128` 打开
-
-**2. 连接免费提供商（无需注册）：**
-
-控制面板 → 提供商 → 连接 **Kiro AI**（约 50 积分/月免费：Claude 4.5 + GLM-5 + MiniMax）或 **OpenCode Free**（无需认证）→ 完成！
-
-**3. 在 CLI 工具中使用：**
-
-```
-Claude Code/Codex/OpenClaw/Cursor/Cline 设置：
-  Endpoint: http://localhost:20128/v1
-  API Key: [从控制面板复制]
-  Model: kr/claude-sonnet-4.5
-```
-
-**就这么简单！** 开始使用免费 AI 模型编程。
-
-**替代方案：从源码运行（本仓库）：**
-
-本仓库的包是私有的（`9router-app`），所以源码/Docker 执行是预期的本地开发方式。
+### 1. 克隆并安装仓库
 
 ```bash
+git clone https://github.com/FebryGanzzz/9router.git
+cd 9router
 cp .env.example .env
 npm install
+```
+
+### 2. 启动 9Router
+
+**开发模式：**
+
+```bash
 PORT=20128 NEXT_PUBLIC_BASE_URL=http://localhost:20128 npm run dev
 ```
 
-生产模式：
+**生产模式：**
 
 ```bash
 npm run build
@@ -113,8 +96,50 @@ PORT=20128 HOSTNAME=0.0.0.0 NEXT_PUBLIC_BASE_URL=http://localhost:20128 npm run 
 ```
 
 默认 URL：
-- 控制面板：`http://localhost:20128/dashboard`
-- OpenAI 兼容 API：`http://localhost:20128/v1`
+- **控制面板**：`http://localhost:20128/dashboard`
+- **OpenAI 兼容 API**：`http://localhost:20128/v1`
+
+---
+
+### 3. 连接提供商（Freebuff、Kiro、OpenCode）
+
+1. 打开控制面板 `http://localhost:20128/dashboard` → **提供商 (Providers)** 标签页。
+2. **Freebuff (`cb/`)**：选择 **Freebuff** → 点击 **登录 (Login)** 进行设备码 OAuth 认证（或填入 Codebuff `authToken`）。支持的模型：
+   - `cb/mimo/mimo-v2.5`（默认免费层）
+   - `cb/minimax/minimax-m2.7`
+   - `cb/z-ai/glm-5.1`
+   - `cb/google/gemini-3.1-pro-preview`
+   - `cb/deepseek/deepseek-v4-flash`
+   - `cb/deepseek/deepseek-v4-pro`
+   - `cb/moonshotai/kimi-k2.6`
+3. **Kiro AI (`kr/`)** 或 **OpenCode Free (`oc/`)**：连接获取更多免费模型。
+
+---
+
+### 4. 在 AI 工具 / CLI 中使用
+
+在 Claude Code、Cursor、Cline、OpenClaw、Continue 等工具中配置端点：
+
+```
+设置 / 配置:
+  Endpoint / Base URL: http://localhost:20128/v1
+  API Key: [从控制面板 Keys 页面复制]
+  Model: cb/mimo/mimo-v2.5 (或 kr/claude-sonnet-4.5)
+```
+
+**cURL 直接调用示例：**
+
+```bash
+curl http://localhost:20128/v1/chat/completions \
+  -H "Authorization: Bearer <9router-api-key>" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "cb/mimo/mimo-v2.5",
+    "messages": [
+      {"role": "user", "content": "你好，来自 9Router FebryGanzzz 版本！"}
+    ]
+  }'
+```
 
 ---
 

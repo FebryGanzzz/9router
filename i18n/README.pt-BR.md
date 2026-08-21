@@ -71,43 +71,26 @@ Resultado: programe sem interrupções, com custo mínimo e economia de 20% a 40
 
 ---
 
-## ⚡ Início rápido
+## ⚡ Início rápido (Edição FebryGanzzz)
 
-**1. Instale globalmente:**
-
-```bash
-npm install -g 9router
-9router
-```
-
-🎉 O painel abre em `http://localhost:20128`
-
-**2. Conecte um provedor GRATUITO (sem necessidade de inscrição):**
-
-Painel → Provedores → Conecte **Kiro AI** (~50 créditos/mês grátis: Claude 4.5 + GLM-5 + MiniMax) ou **OpenCode Free** (sem autenticação) → Pronto!
-
-**3. Use em sua ferramenta CLI:**
-
-```
-Configurações do Claude Code/Codex/OpenClaw/Cursor/Cline:
-  Endpoint: http://localhost:20128/v1
-  API Key: [copie do painel]
-  Model: kr/claude-sonnet-4.5
-```
-
-**É isso aí!** Comece a codificar com modelos de IA GRATUITOS.
-
-**Alternativa: executar a partir do código-fonte (este repositório):**
-
-Este pacote de repositório é privado (`9router-app`), portanto, a execução pelo código-fonte/Docker é o caminho de desenvolvimento local esperado.
+### 1. Clonar e instalar o repositório
 
 ```bash
+git clone https://github.com/FebryGanzzz/9router.git
+cd 9router
 cp .env.example .env
 npm install
+```
+
+### 2. Executar o 9Router
+
+**Modo de desenvolvimento:**
+
+```bash
 PORT=20128 NEXT_PUBLIC_BASE_URL=http://localhost:20128 npm run dev
 ```
 
-Modo de produção:
+**Modo de produção:**
 
 ```bash
 npm run build
@@ -115,9 +98,50 @@ PORT=20128 HOSTNAME=0.0.0.0 NEXT_PUBLIC_BASE_URL=http://localhost:20128 npm run 
 ```
 
 URLs padrão:
+- **Painel**: `http://localhost:20128/dashboard`
+- **API compatível com OpenAI**: `http://localhost:20128/v1`
 
-- Painel: `http://localhost:20128/dashboard`
-- API compatível com OpenAI: `http://localhost:20128/v1`
+---
+
+### 3. Conectar provedores (Freebuff, Kiro, OpenCode)
+
+1. Abra o painel em `http://localhost:20128/dashboard` → aba **Provedores (Providers)**.
+2. **Freebuff (`cb/`)**: Selecione **Freebuff** → Clique em **Login** para autenticação OAuth Device-Code (ou insira seu `authToken` do Codebuff). Modelos disponíveis:
+   - `cb/mimo/mimo-v2.5` (Nível gratuito padrão)
+   - `cb/minimax/minimax-m2.7`
+   - `cb/z-ai/glm-5.1`
+   - `cb/google/gemini-3.1-pro-preview`
+   - `cb/deepseek/deepseek-v4-flash`
+   - `cb/deepseek/deepseek-v4-pro`
+   - `cb/moonshotai/kimi-k2.6`
+3. **Kiro AI (`kr/`)** ou **OpenCode Free (`oc/`)**: Conecte para modelos gratuitos adicionais.
+
+---
+
+### 4. Usar em ferramentas de IA / CLI
+
+Configure o endpoint no Claude Code, Cursor, Cline, OpenClaw, Continue, etc.:
+
+```
+Configurações / Config:
+  Endpoint / Base URL: http://localhost:20128/v1
+  API Key: [Copie do menu Keys no painel]
+  Model: cb/mimo/mimo-v2.5 (ou kr/claude-sonnet-4.5)
+```
+
+**Exemplo cURL direto:**
+
+```bash
+curl http://localhost:20128/v1/chat/completions \
+  -H "Authorization: Bearer <9router-api-key>" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "cb/mimo/mimo-v2.5",
+    "messages": [
+      {"role": "user", "content": "Olá do 9Router edição FebryGanzzz!"}
+    ]
+  }'
+```
 
 ---
 
