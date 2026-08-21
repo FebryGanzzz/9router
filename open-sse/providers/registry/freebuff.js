@@ -1,0 +1,41 @@
+export default {
+  id: "freebuff",
+  priority: 25,
+  hasFree: true,
+  alias: "cb",
+  aliases: ["codebuff"],
+  uiAlias: "cb",
+  display: {
+    name: "Freebuff",
+    icon: "smart_toy",
+    color: "#4FC3F7",
+    textIcon: "FB",
+    website: "https://www.codebuff.com",
+    notice: {
+      signupUrl: "https://www.codebuff.com",
+    },
+  },
+  category: "free",
+  hasOAuth: true,
+  authType: "oauth",
+  authModes: ["oauth", "apikey"],
+  transport: {
+    baseUrl: "https://www.codebuff.com/api/v1/chat/completions",
+    format: "openai",
+    timeoutMs: 120000,
+  },
+  models: [
+    { id: "mimo/mimo-v2.5", name: "MiMo v2.5 (Free)" },
+    { id: "minimax/minimax-m2.7", name: "MiniMax M2.7 (Free)" },
+    { id: "z-ai/glm-5.1", name: "GLM 5.1 (Free)" },
+    { id: "google/gemini-3.1-pro-preview", name: "Gemini 3.1 Pro Preview (Free)" },
+    { id: "deepseek/deepseek-v4-flash", name: "DeepSeek v4 Flash (Free)" },
+    { id: "deepseek/deepseek-v4-pro", name: "DeepSeek v4 Pro (Free)" },
+    { id: "moonshotai/kimi-k2.6", name: "Kimi k2.6 (Free)" },
+  ],
+  oauth: {
+    deviceCodeUrl: "https://www.codebuff.com/api/auth/cli/code",
+    tokenUrl: "https://www.codebuff.com/api/auth/cli/status",
+  },
+  passthroughModels: true,
+};

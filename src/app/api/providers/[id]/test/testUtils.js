@@ -125,6 +125,25 @@ const OAUTH_TEST_CONFIG = {
       402: "Connected, but Grok Build credits are exhausted (spending limit). Add credits or upgrade SuperGrok.",
     },
   },
+  freebuff: {
+    url: "https://www.codebuff.com/api/v1/freebuff/session",
+    method: "POST",
+    authHeader: "Authorization",
+    authPrefix: "Bearer ",
+    extraHeaders: {
+      "Content-Type": "application/json",
+      "User-Agent": "Freebuff-CLI/0.0.150",
+      Accept: "application/json",
+    },
+    body: JSON.stringify({
+      provider: "gravity",
+      messages: [],
+      sessionId: "test-conn",
+      device: { os: "linux", timezone: "UTC", locale: "en-US" },
+      surface: "cli",
+    }),
+    refreshable: false,
+  },
 };
 
 /**
