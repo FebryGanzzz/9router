@@ -72,6 +72,16 @@ async function getFreebuffSession(token, model = DEFAULT_MODEL, proxyOptions = n
 
   if (!resp.ok) {
     const text = await resp.text();
+    if (resp.status === 409) {
+      try {
+        const errJson = JSON.parse(text);
+        if (errJson.status === "model_locked" && errJson.currentModel) {
+          if (errJson.currentModel !== model) {
+            return await getFreebuffSession(token, errJson.currentModel, proxyOptions);
+          }
+        }
+      } catch {}
+    }
     throw new Error(`Freebuff session failed (${resp.status}): ${text.slice(0, 200)}`);
   }
 
@@ -252,10 +262,32 @@ export class FreebuffExecutor extends BaseExecutor {
         throw err;
       }
 
+      let messages = injectBuffyMarker(body?.messages);
+
+      // If client sent tools, append their definitions to the system prompt so the model is aware of them
+      // without passing raw `tools` array which causes Codebuff router 404 ("No endpoints found for mimo/mimo-v2.5").
+      if (Array.isArray(body?.tools) && body.tools.length > 0) {
+        const toolDefs = body.tools
+          .map((t) => {
+            const f = t.function || t;
+            if (!f?.name) return null;
+            return `- ${f.name}: ${f.description || ""}\n  Parameters: ${JSON.stringify(f.parameters || {})}`;
+          })
+          .filter(Boolean)
+          .join("\n");
+        if (toolDefs) {
+          const toolNotice = `\n\n[Available Tools]\nYou have access to the following tools if needed:\n${toolDefs}`;
+          if (messages[0]?.role === "system") {
+            messages[0] = { ...messages[0], content: messages[0].content + toolNotice };
+          } else {
+            messages.unshift({ role: "system", content: BUFFY_SYSTEM_MARKER + toolNotice });
+          }
+        }
+      }
+
       const transformedBody = {
-        ...(body || {}),
         model: resolvedModel,
-        messages: injectBuffyMarker(body?.messages),
+        messages,
         max_tokens: body?.max_tokens || body?.max_completion_tokens || 4096,
         stream: stream !== false,
         codebuff_metadata: {
@@ -267,6 +299,13 @@ export class FreebuffExecutor extends BaseExecutor {
         provider: { data_collection: "deny" },
         stop: ["cb_easp"],
       };
+
+      if (body?.temperature !== undefined) {
+        transformedBody.temperature = body.temperature;
+      }
+      if (body?.top_p !== undefined) {
+        transformedBody.top_p = body.top_p;
+      }
 
       const headers = this.buildHeaders(credentials, stream);
       const url = this.buildUrl();
@@ -295,7 +334,8 @@ export class FreebuffExecutor extends BaseExecutor {
 
         const retryable =
           response.status === 428 ||
-          (response.status === 409 && errText.includes("superseded")) ||
+          (response.status === 404 && errText.includes("No endpoints found")) ||
+          (response.status === 409 && (errText.includes("superseded") || errText.includes("model_locked"))) ||
           (response.status === 429 && errText.includes("capacity"));
 
         await finishAgentRun(token, runId, proxyOptions);
